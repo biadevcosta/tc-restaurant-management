@@ -1,15 +1,21 @@
 package com.fiap.tc.restaurant.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import com.fiap.tc.restaurant.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "base_users")
@@ -25,7 +31,7 @@ public abstract class BaseUser implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String login;
 
     @Column(nullable = false)
@@ -37,13 +43,12 @@ public abstract class BaseUser implements UserDetails {
     private Address address;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private UserRole role;
-
-    // Métodos do UserDetails
 
     @Override
     public String getUsername() {
-        return login; // Spring Security usa o login, não o name
+        return login;
     }
 
     @Override

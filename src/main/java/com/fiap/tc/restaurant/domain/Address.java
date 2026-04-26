@@ -2,21 +2,21 @@ package com.fiap.tc.restaurant.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
 @Embeddable
 public class Address {
 
     @Column(nullable = false)
-    private String streetAddress;
+    private String street;
 
     @Column(nullable = false)
-    private String numberAddress;
+    private String number;
 
     @Column(nullable = false)
     private String city;
@@ -28,4 +28,3 @@ public class Address {
     private String zipCode;
 
 }
-
