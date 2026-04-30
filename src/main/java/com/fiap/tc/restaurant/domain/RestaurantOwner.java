@@ -6,5 +6,5 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "restaurant_owners")
 
-public abstract class RestaurantOwner extends BaseUser {
+public class RestaurantOwner extends BaseUser {
 }
