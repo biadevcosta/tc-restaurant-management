@@ -1,6 +1,7 @@
 package com.fiap.tc.restaurant.service;
 
 import com.fiap.tc.restaurant.dto.request.RestaurantOwnerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface RestaurantOwnerService {
     List<UserResponse> findByName(String name);
 
     void delete(Long id);
+
+    UserResponse update(Long id, UpdateUserRequest dto);
 }

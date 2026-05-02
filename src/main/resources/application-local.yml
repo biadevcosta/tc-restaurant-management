@@ -1,5 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/restaurant_db
+    url: jdbc:mysql://localhost:3306/restaurant_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
     username: ${DB_USER:admin}
     password: ${DB_PASS:secret123}
+    driver-class-name: com.mysql.cj.jdbc.Driver

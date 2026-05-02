@@ -1,9 +1,11 @@
 package com.fiap.tc.restaurant.service.impl;
 
 import com.fiap.tc.restaurant.dto.request.RestaurantOwnerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 import com.fiap.tc.restaurant.enums.UserRole;
 import com.fiap.tc.restaurant.exception.DuplicateUserException;
+import com.fiap.tc.restaurant.exception.EmailAlreadyExistsException;
 import com.fiap.tc.restaurant.exception.UserNotFoundException;
 import com.fiap.tc.restaurant.mapper.RestaurantOwnerMapper;
 import com.fiap.tc.restaurant.repository.RestaurantOwnerRepository;
@@ -62,5 +64,28 @@ public class RestaurantOwnerServiceImpl implements RestaurantOwnerService {
             throw new UserNotFoundException("Restaurant owner not found with id: " + id);
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    public UserResponse update(Long id, UpdateUserRequest dto) {
+        var owner = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Restaurant owner not found with id: " + id));
+
+        repository.findByEmail(dto.email())
+                .filter(existing -> !existing.getId().equals(id))
+                .ifPresent(existing -> {
+                    throw new EmailAlreadyExistsException("Email already in use: " + dto.email());
+                });
+
+        owner.setName(dto.name());
+        owner.setEmail(dto.email());
+        owner.getAddress().setStreet(dto.address().street());
+        owner.getAddress().setNumber(dto.address().number());
+        owner.getAddress().setCity(dto.address().city());
+        owner.getAddress().setState(dto.address().state());
+        owner.getAddress().setZipCode(dto.address().zipCode());
+        owner.setLastModifiedAt(LocalDateTime.now());
+
+        return RestaurantOwnerMapper.toResponse(repository.save(owner));
     }
 }
