@@ -1,6 +1,7 @@
 package com.fiap.tc.restaurant.service.impl;
 
 import com.fiap.tc.restaurant.dto.request.CreateCustomerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 import com.fiap.tc.restaurant.enums.UserRole;
 import com.fiap.tc.restaurant.exception.EmailAlreadyExistsException;
@@ -63,5 +64,28 @@ public class CustomerServiceImpl implements CustomerService {
             throw new UserNotFoundException("Customer not found with id: " + id);
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    public UserResponse update(Long id, UpdateUserRequest dto) {
+        var customer = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Customer not found with id: " + id));
+
+        repository.findByEmail(dto.email())
+                .filter(existing -> !existing.getId().equals(id))
+                .ifPresent(existing -> {
+                    throw new EmailAlreadyExistsException("Email already in use: " + dto.email());
+                });
+
+        customer.setName(dto.name());
+        customer.setEmail(dto.email());
+        customer.getAddress().setStreet(dto.address().street());
+        customer.getAddress().setNumber(dto.address().number());
+        customer.getAddress().setCity(dto.address().city());
+        customer.getAddress().setState(dto.address().state());
+        customer.getAddress().setZipCode(dto.address().zipCode());
+        customer.setLastModifiedAt(LocalDateTime.now());
+
+        return CustomerMapper.toResponse(repository.save(customer));
     }
 }

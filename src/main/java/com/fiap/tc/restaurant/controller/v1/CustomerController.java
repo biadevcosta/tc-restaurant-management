@@ -1,6 +1,7 @@
 package com.fiap.tc.restaurant.controller.v1;
 
 import com.fiap.tc.restaurant.dto.request.CreateCustomerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 import com.fiap.tc.restaurant.service.CustomerService;
 import jakarta.validation.Valid;
@@ -39,5 +40,10 @@ public class CustomerController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest dto) {
+        return ResponseEntity.ok(service.update(id, dto));
     }
 }
