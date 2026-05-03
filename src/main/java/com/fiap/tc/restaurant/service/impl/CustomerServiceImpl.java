@@ -1,5 +1,6 @@
 package com.fiap.tc.restaurant.service.impl;
 
+import com.fiap.tc.restaurant.domain.BaseUser;
 import com.fiap.tc.restaurant.dto.request.CreateCustomerRequest;
 import com.fiap.tc.restaurant.dto.request.UpdatePasswordRequest;
 import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
@@ -8,10 +9,12 @@ import com.fiap.tc.restaurant.enums.UserRole;
 import com.fiap.tc.restaurant.exception.EmailAlreadyExistsException;
 import com.fiap.tc.restaurant.exception.InvalidPasswordException;
 import com.fiap.tc.restaurant.exception.LoginAlreadyExistsException;
+import com.fiap.tc.restaurant.exception.UnauthorizedOperationException;
 import com.fiap.tc.restaurant.exception.UserNotFoundException;
 import com.fiap.tc.restaurant.mapper.CustomerMapper;
 import com.fiap.tc.restaurant.repository.CustomerRepository;
 import com.fiap.tc.restaurant.service.CustomerService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -70,6 +73,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public UserResponse update(Long id, UpdateUserRequest dto) {
+        BaseUser authenticated = (BaseUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!authenticated.getId().equals(id)) {
+            throw new UnauthorizedOperationException("You can only modify your own data");
+        }
+
         var customer = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Customer not found with id: " + id));
 
@@ -93,6 +101,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updatePassword(Long id, UpdatePasswordRequest dto) {
+        BaseUser authenticated = (BaseUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!authenticated.getId().equals(id)) {
+            throw new UnauthorizedOperationException("You can only modify your own data");
+        }
+
         var customer = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Customer not found with id: " + id));
 

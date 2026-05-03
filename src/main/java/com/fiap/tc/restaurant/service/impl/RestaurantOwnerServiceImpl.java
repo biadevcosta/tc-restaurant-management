@@ -1,5 +1,6 @@
 package com.fiap.tc.restaurant.service.impl;
 
+import com.fiap.tc.restaurant.domain.BaseUser;
 import com.fiap.tc.restaurant.dto.request.RestaurantOwnerRequest;
 import com.fiap.tc.restaurant.dto.request.UpdatePasswordRequest;
 import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
@@ -8,10 +9,12 @@ import com.fiap.tc.restaurant.enums.UserRole;
 import com.fiap.tc.restaurant.exception.DuplicateUserException;
 import com.fiap.tc.restaurant.exception.EmailAlreadyExistsException;
 import com.fiap.tc.restaurant.exception.InvalidPasswordException;
+import com.fiap.tc.restaurant.exception.UnauthorizedOperationException;
 import com.fiap.tc.restaurant.exception.UserNotFoundException;
 import com.fiap.tc.restaurant.mapper.RestaurantOwnerMapper;
 import com.fiap.tc.restaurant.repository.RestaurantOwnerRepository;
 import com.fiap.tc.restaurant.service.RestaurantOwnerService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -70,6 +73,11 @@ public class RestaurantOwnerServiceImpl implements RestaurantOwnerService {
 
     @Override
     public UserResponse update(Long id, UpdateUserRequest dto) {
+        BaseUser authenticated = (BaseUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!authenticated.getId().equals(id)) {
+            throw new UnauthorizedOperationException("You can only modify your own data");
+        }
+
         var owner = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Restaurant owner not found with id: " + id));
 
@@ -93,6 +101,11 @@ public class RestaurantOwnerServiceImpl implements RestaurantOwnerService {
 
     @Override
     public void updatePassword(Long id, UpdatePasswordRequest dto) {
+        BaseUser authenticated = (BaseUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!authenticated.getId().equals(id)) {
+            throw new UnauthorizedOperationException("You can only modify your own data");
+        }
+
         var owner = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Restaurant owner not found with id: " + id));
 
