@@ -1,11 +1,13 @@
 package com.fiap.tc.restaurant.service.impl;
 
 import com.fiap.tc.restaurant.dto.request.RestaurantOwnerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdatePasswordRequest;
 import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 import com.fiap.tc.restaurant.enums.UserRole;
 import com.fiap.tc.restaurant.exception.DuplicateUserException;
 import com.fiap.tc.restaurant.exception.EmailAlreadyExistsException;
+import com.fiap.tc.restaurant.exception.InvalidPasswordException;
 import com.fiap.tc.restaurant.exception.UserNotFoundException;
 import com.fiap.tc.restaurant.mapper.RestaurantOwnerMapper;
 import com.fiap.tc.restaurant.repository.RestaurantOwnerRepository;
@@ -87,5 +89,19 @@ public class RestaurantOwnerServiceImpl implements RestaurantOwnerService {
         owner.setLastModifiedAt(LocalDateTime.now());
 
         return RestaurantOwnerMapper.toResponse(repository.save(owner));
+    }
+
+    @Override
+    public void updatePassword(Long id, UpdatePasswordRequest dto) {
+        var owner = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Restaurant owner not found with id: " + id));
+
+        if (!passwordEncoder.matches(dto.currentPassword(), owner.getPassword())) {
+            throw new InvalidPasswordException("Current password is incorrect");
+        }
+
+        owner.setPassword(passwordEncoder.encode(dto.newPassword()));
+        owner.setLastModifiedAt(LocalDateTime.now());
+        repository.save(owner);
     }
 }

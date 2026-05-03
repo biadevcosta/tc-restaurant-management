@@ -98,6 +98,34 @@
               "response": []
             },
             {
+              "name": "Change Restaurant Owner Password",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/restaurant-owners/1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "restaurant-owners",
+                    "1",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
               "name": "Update Restaurant Owner",
               "request": {
                 "method": "PUT",
@@ -401,6 +429,90 @@
                 }
               },
               "response": []
+            },
+            {
+              "name": "[400] Change Password - Wrong Current Password",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senhaErrada\",\n  \"newPassword\": \"novaSenha456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/restaurant-owners/1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "restaurant-owners",
+                    "1",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400] Change Password - New Password Too Short",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/restaurant-owners/1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "restaurant-owners",
+                    "1",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[404] Change Password - Non-existent ID",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/restaurant-owners/99999/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "restaurant-owners",
+                    "99999",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
             }
           ]
         }
@@ -500,6 +612,36 @@
                     "v1",
                     "customers",
                     "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Change Customer Password",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/customers/1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "1",
+                    "password"
                   ]
                 }
               },
@@ -829,6 +971,96 @@
                     "v1",
                     "customers",
                     "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400] Change Password - Wrong Current Password",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senhaErrada\",\n  \"newPassword\": \"novaSenha456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/customers/1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "1",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400] Change Password - New Password Too Short",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/customers/1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "1",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[404] Change Password - Non-existent ID",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/customers/99999/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "99999",
+                    "password"
                   ]
                 }
               },
