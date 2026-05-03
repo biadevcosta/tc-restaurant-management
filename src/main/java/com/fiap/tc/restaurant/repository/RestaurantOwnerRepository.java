@@ -14,5 +14,7 @@ public interface RestaurantOwnerRepository extends JpaRepository<RestaurantOwner
 
     Optional<RestaurantOwner> findByEmail(String email);
 
+    Optional<RestaurantOwner> findByLogin(String login);
+
     List<RestaurantOwner> findByNameContainingIgnoreCase(String name);
 }
