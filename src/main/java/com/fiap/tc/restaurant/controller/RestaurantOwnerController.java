@@ -1,6 +1,7 @@
 package com.fiap.tc.restaurant.controller;
 
 import com.fiap.tc.restaurant.dto.request.RestaurantOwnerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdatePasswordRequest;
 import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 import com.fiap.tc.restaurant.service.RestaurantOwnerService;
@@ -45,5 +46,11 @@ public class RestaurantOwnerController {
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest request) {
         return ResponseEntity.ok(service.update(id, request));
+    }
+
+    @PatchMapping("/{id}/password")
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody @Valid UpdatePasswordRequest request) {
+        service.updatePassword(id, request);
+        return ResponseEntity.ok().build();
     }
 }

@@ -1,10 +1,12 @@
 package com.fiap.tc.restaurant.service.impl;
 
 import com.fiap.tc.restaurant.dto.request.CreateCustomerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdatePasswordRequest;
 import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 import com.fiap.tc.restaurant.enums.UserRole;
 import com.fiap.tc.restaurant.exception.EmailAlreadyExistsException;
+import com.fiap.tc.restaurant.exception.InvalidPasswordException;
 import com.fiap.tc.restaurant.exception.LoginAlreadyExistsException;
 import com.fiap.tc.restaurant.exception.UserNotFoundException;
 import com.fiap.tc.restaurant.mapper.CustomerMapper;
@@ -87,5 +89,19 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setLastModifiedAt(LocalDateTime.now());
 
         return CustomerMapper.toResponse(repository.save(customer));
+    }
+
+    @Override
+    public void updatePassword(Long id, UpdatePasswordRequest dto) {
+        var customer = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Customer not found with id: " + id));
+
+        if (!passwordEncoder.matches(dto.currentPassword(), customer.getPassword())) {
+            throw new InvalidPasswordException("Current password is incorrect");
+        }
+
+        customer.setPassword(passwordEncoder.encode(dto.newPassword()));
+        customer.setLastModifiedAt(LocalDateTime.now());
+        repository.save(customer);
     }
 }

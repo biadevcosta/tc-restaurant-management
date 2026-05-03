@@ -1,6 +1,7 @@
 package com.fiap.tc.restaurant.service;
 
 import com.fiap.tc.restaurant.dto.request.RestaurantOwnerRequest;
+import com.fiap.tc.restaurant.dto.request.UpdatePasswordRequest;
 import com.fiap.tc.restaurant.dto.request.UpdateUserRequest;
 import com.fiap.tc.restaurant.dto.response.UserResponse;
 
@@ -17,4 +18,6 @@ public interface RestaurantOwnerService {
     void delete(Long id);
 
     UserResponse update(Long id, UpdateUserRequest dto);
+
+    void updatePassword(Long id, UpdatePasswordRequest dto);
 }
