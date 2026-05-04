@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/customers")
-@Tag(name = "Customers", description = "Gerenciamento de clientes")
+@Tag(name = "Customers", description = "Customer management")
 public class CustomerController {
 
     private final CustomerService service;
@@ -32,13 +32,13 @@ public class CustomerController {
     }
 
     @PostMapping
-    @Operation(summary = "Criar cliente", description = "Cadastra um novo cliente. Endpoint público.")
+    @Operation(summary = "Create customer", description = "Registers a new customer. Public endpoint.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso",
+            @ApiResponse(responseCode = "201", description = "Customer created successfully",
                     content = @Content(schema = @Schema(implementation = UserResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Campos inválidos ou ausentes",
+            @ApiResponse(responseCode = "400", description = "Invalid or missing fields",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "409", description = "E-mail ou login já em uso",
+            @ApiResponse(responseCode = "409", description = "Email or login already in use",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<UserResponse> create(@RequestBody @Valid CreateCustomerRequest dto) {
@@ -47,13 +47,13 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Buscar cliente por ID")
+    @Operation(summary = "Get customer by ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Cliente encontrado",
+            @ApiResponse(responseCode = "200", description = "Customer found",
                     content = @Content(schema = @Schema(implementation = UserResponse.class))),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Cliente não encontrado",
+            @ApiResponse(responseCode = "404", description = "Customer not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
@@ -62,10 +62,10 @@ public class CustomerController {
 
     @GetMapping
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Buscar clientes por nome")
+    @Operation(summary = "Search customers by name")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista de clientes"),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "200", description = "Customer list"),
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<List<UserResponse>> findByName(@RequestParam String name) {
@@ -74,12 +74,12 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Deletar cliente")
+    @Operation(summary = "Delete customer")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Cliente deletado com sucesso"),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "204", description = "Customer deleted successfully"),
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Cliente não encontrado",
+            @ApiResponse(responseCode = "404", description = "Customer not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<Void> delete(@PathVariable Long id) {
@@ -89,19 +89,19 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Atualizar dados do cliente", description = "Apenas o próprio cliente pode atualizar seus dados.")
+    @Operation(summary = "Update customer", description = "Only the customer themselves can update their own data.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Dados atualizados com sucesso",
+            @ApiResponse(responseCode = "200", description = "Data updated successfully",
                     content = @Content(schema = @Schema(implementation = UserResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Campos inválidos",
+            @ApiResponse(responseCode = "400", description = "Invalid fields",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "403", description = "Tentativa de modificar dados de outro usuário",
+            @ApiResponse(responseCode = "403", description = "Attempt to modify another user's data",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Cliente não encontrado",
+            @ApiResponse(responseCode = "404", description = "Customer not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "409", description = "E-mail já em uso",
+            @ApiResponse(responseCode = "409", description = "Email already in use",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest dto) {
@@ -110,16 +110,16 @@ public class CustomerController {
 
     @PatchMapping("/{id}/password")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Alterar senha do cliente", description = "Apenas o próprio cliente pode alterar sua senha.")
+    @Operation(summary = "Change customer password", description = "Only the customer themselves can change their own password.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Senha alterada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Senha atual incorreta ou nova senha inválida",
+            @ApiResponse(responseCode = "200", description = "Password changed successfully"),
+            @ApiResponse(responseCode = "400", description = "Wrong current password or new password too short",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "403", description = "Tentativa de modificar senha de outro usuário",
+            @ApiResponse(responseCode = "403", description = "Attempt to change another user's password",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Cliente não encontrado",
+            @ApiResponse(responseCode = "404", description = "Customer not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody @Valid UpdatePasswordRequest dto) {

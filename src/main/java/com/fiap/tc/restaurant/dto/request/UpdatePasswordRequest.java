@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UpdatePasswordRequest(
-        @NotBlank @Schema(description = "Senha atual", example = "senha123") String currentPassword,
-        @NotBlank @Size(min = 8) @Schema(description = "Nova senha (mínimo 8 caracteres)", example = "novaSenha456") String newPassword
+        @NotBlank @Schema(description = "Current password", example = "password123") String currentPassword,
+        @NotBlank @Size(min = 8) @Schema(description = "New password (minimum 8 characters)", example = "newPassword456") String newPassword
 ) {
 }

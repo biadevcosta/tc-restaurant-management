@@ -8,9 +8,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record RestaurantOwnerRequest(
-        @NotBlank @Schema(description = "Nome completo", example = "João Silva") String name,
-        @NotBlank @Email @Schema(description = "E-mail único", example = "joao@restaurante.com") String email,
-        @NotBlank @Schema(description = "Login único", example = "joaosilva") String login,
-        @NotBlank @Size(min = 8) @Schema(description = "Senha (mínimo 8 caracteres)", example = "senha123") String password,
-        @NotNull @Valid @Schema(description = "Endereço do dono do restaurante") AddressRequest address
+        @NotBlank @Schema(description = "Full name", example = "João Silva") String name,
+        @NotBlank @Email @Schema(description = "Unique email", example = "joao@restaurante.com") String email,
+        @NotBlank @Schema(description = "Unique login", example = "joaosilva") String login,
+        @NotBlank @Size(min = 8) @Schema(description = "Password (minimum 8 characters)", example = "password123") String password,
+        @NotNull @Valid @Schema(description = "Restaurant owner address") AddressRequest address
 ) {}

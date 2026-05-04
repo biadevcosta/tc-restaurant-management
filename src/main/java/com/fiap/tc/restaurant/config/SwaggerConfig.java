@@ -1,5 +1,6 @@
 package com.fiap.tc.restaurant.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -14,11 +15,16 @@ public class SwaggerConfig {
     private static final String SECURITY_SCHEME_NAME = "Bearer Authentication";
 
     @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .info(new Info()
                         .title("TC Restaurant Management API")
-                        .description("API para gerenciamento de restaurantes — autenticação via JWT Bearer token.")
+                        .description("Restaurant management API — authentication via JWT Bearer token.")
                         .version("1.0.0"))
                 .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
                 .components(new Components()

@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public record LoginResponse(
         @Schema(description = "JWT Bearer token") String token,
-        @Schema(description = "ID do usuário autenticado", example = "1") Long userId,
-        @Schema(description = "Tipo do usuário", example = "CUSTOMER", allowableValues = {"CUSTOMER", "RESTAURANT_OWNER"}) String userType
+        @Schema(description = "Authenticated user ID", example = "1") Long userId,
+        @Schema(description = "User type", example = "CUSTOMER", allowableValues = {"CUSTOMER", "RESTAURANT_OWNER"}) String userType
 ) {
 }

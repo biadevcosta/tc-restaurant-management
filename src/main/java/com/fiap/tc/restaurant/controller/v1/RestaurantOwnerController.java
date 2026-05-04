@@ -1,4 +1,4 @@
-package com.fiap.tc.restaurant.controller;
+package com.fiap.tc.restaurant.controller.v1;
 
 import com.fiap.tc.restaurant.dto.request.RestaurantOwnerRequest;
 import com.fiap.tc.restaurant.dto.request.UpdatePasswordRequest;
@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurant-owners")
-@Tag(name = "Restaurant Owners", description = "Gerenciamento de donos de restaurante")
+@RequestMapping("/api/v1/restaurant-owners")
+@Tag(name = "Restaurant Owners", description = "Restaurant owner management")
 public class RestaurantOwnerController {
 
     private final RestaurantOwnerService service;
@@ -32,13 +32,13 @@ public class RestaurantOwnerController {
     }
 
     @PostMapping
-    @Operation(summary = "Criar dono de restaurante", description = "Cadastra um novo dono de restaurante. Endpoint público.")
+    @Operation(summary = "Create restaurant owner", description = "Registers a new restaurant owner. Public endpoint.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Dono criado com sucesso",
+            @ApiResponse(responseCode = "201", description = "Restaurant owner created successfully",
                     content = @Content(schema = @Schema(implementation = UserResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Campos inválidos ou ausentes",
+            @ApiResponse(responseCode = "400", description = "Invalid or missing fields",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "409", description = "E-mail ou login já em uso",
+            @ApiResponse(responseCode = "409", description = "Email or login already in use",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<UserResponse> create(@RequestBody @Valid RestaurantOwnerRequest request) {
@@ -47,13 +47,13 @@ public class RestaurantOwnerController {
 
     @GetMapping("/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Buscar dono por ID")
+    @Operation(summary = "Get restaurant owner by ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Dono encontrado",
+            @ApiResponse(responseCode = "200", description = "Restaurant owner found",
                     content = @Content(schema = @Schema(implementation = UserResponse.class))),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Dono não encontrado",
+            @ApiResponse(responseCode = "404", description = "Restaurant owner not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
@@ -62,10 +62,10 @@ public class RestaurantOwnerController {
 
     @GetMapping
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Buscar donos por nome")
+    @Operation(summary = "Search restaurant owners by name")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista de donos"),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "200", description = "Restaurant owner list"),
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<List<UserResponse>> findByName(@RequestParam String name) {
@@ -74,12 +74,12 @@ public class RestaurantOwnerController {
 
     @DeleteMapping("/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Deletar dono de restaurante")
+    @Operation(summary = "Delete restaurant owner")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Dono deletado com sucesso"),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "204", description = "Restaurant owner deleted successfully"),
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Dono não encontrado",
+            @ApiResponse(responseCode = "404", description = "Restaurant owner not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<Void> delete(@PathVariable Long id) {
@@ -89,19 +89,19 @@ public class RestaurantOwnerController {
 
     @PutMapping("/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Atualizar dados do dono", description = "Apenas o próprio dono pode atualizar seus dados.")
+    @Operation(summary = "Update restaurant owner", description = "Only the owner themselves can update their own data.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Dados atualizados com sucesso",
+            @ApiResponse(responseCode = "200", description = "Data updated successfully",
                     content = @Content(schema = @Schema(implementation = UserResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Campos inválidos",
+            @ApiResponse(responseCode = "400", description = "Invalid fields",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "403", description = "Tentativa de modificar dados de outro usuário",
+            @ApiResponse(responseCode = "403", description = "Attempt to modify another user's data",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Dono não encontrado",
+            @ApiResponse(responseCode = "404", description = "Restaurant owner not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "409", description = "E-mail já em uso",
+            @ApiResponse(responseCode = "409", description = "Email already in use",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest request) {
@@ -110,16 +110,16 @@ public class RestaurantOwnerController {
 
     @PatchMapping("/{id}/password")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Alterar senha do dono", description = "Apenas o próprio dono pode alterar sua senha.")
+    @Operation(summary = "Change restaurant owner password", description = "Only the owner themselves can change their own password.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Senha alterada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Senha atual incorreta ou nova senha inválida",
+            @ApiResponse(responseCode = "200", description = "Password changed successfully"),
+            @ApiResponse(responseCode = "400", description = "Wrong current password or new password too short",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "401", description = "Token ausente ou inválido",
+            @ApiResponse(responseCode = "401", description = "Missing or invalid token",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "403", description = "Tentativa de modificar senha de outro usuário",
+            @ApiResponse(responseCode = "403", description = "Attempt to change another user's password",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "404", description = "Dono não encontrado",
+            @ApiResponse(responseCode = "404", description = "Restaurant owner not found",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody @Valid UpdatePasswordRequest request) {
