@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@Tag(name = "Auth", description = "Autenticação — obtenha o JWT para acessar os endpoints protegidos")
+@Tag(name = "Auth", description = "Authentication — obtain the JWT to access protected endpoints")
 public class AuthController {
 
     private final AuthService authService;
@@ -29,13 +29,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "Login", description = "Autentica o usuário e retorna um JWT Bearer token")
+    @Operation(summary = "Login", description = "Authenticates the user and returns a JWT Bearer token")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Login realizado com sucesso",
+            @ApiResponse(responseCode = "200", description = "Login successful",
                     content = @Content(schema = @Schema(implementation = LoginResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Campos obrigatórios ausentes",
+            @ApiResponse(responseCode = "400", description = "Required fields missing",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class))),
-            @ApiResponse(responseCode = "401", description = "Credenciais inválidas",
+            @ApiResponse(responseCode = "401", description = "Invalid credentials",
                     content = @Content(schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {

@@ -163,11 +163,13 @@
                   "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@restaurante.com\",\n  \"login\": \"joaosilva\",\n  \"password\": \"senha123\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ]
                 }
@@ -185,11 +187,13 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1"
                   ]
@@ -208,11 +212,13 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners?name=joão",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners?name=joão",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ],
                   "query": [
@@ -236,11 +242,13 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1"
                   ]
@@ -267,11 +275,13 @@
                   "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1/password",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1/password",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1",
                     "password"
@@ -299,11 +309,13 @@
                   "raw": "{\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.novo@restaurante.com\",\n  \"address\": {\n    \"street\": \"Rua das Orquídeas\",\n    \"number\": \"456\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-300\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1"
                   ]
@@ -331,11 +343,13 @@
                   "raw": "{\n  \"name\": \"Outro Dono\",\n  \"email\": \"joao@restaurante.com\",\n  \"login\": \"outrodono\",\n  \"password\": \"senha123\",\n  \"address\": {\n    \"street\": \"Rua B\",\n    \"number\": \"99\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ]
                 }
@@ -357,11 +371,13 @@
                   "raw": "{\n  \"name\": \"Outro Dono\",\n  \"email\": \"outro@restaurante.com\",\n  \"login\": \"joaosilva\",\n  \"password\": \"senha123\",\n  \"address\": {\n    \"street\": \"Rua B\",\n    \"number\": \"99\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ]
                 }
@@ -383,11 +399,13 @@
                   "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"login\": \"\",\n  \"password\": \"\",\n  \"address\": null\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ]
                 }
@@ -409,11 +427,13 @@
                   "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"email-invalido\",\n  \"login\": \"joaosilva\",\n  \"password\": \"senha123\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ]
                 }
@@ -435,11 +455,13 @@
                   "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao2@restaurante.com\",\n  \"login\": \"joaosilva2\",\n  \"password\": \"123\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ]
                 }
@@ -461,11 +483,13 @@
                   "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao3@restaurante.com\",\n  \"login\": \"joaosilva3\",\n  \"password\": \"senha123\",\n  \"address\": {\n    \"street\": \"\",\n    \"number\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"zipCode\": \"\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners"
                   ]
                 }
@@ -483,11 +507,13 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/99999",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/99999",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "99999"
                   ]
@@ -506,11 +532,13 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/99999",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/99999",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "99999"
                   ]
@@ -537,11 +565,13 @@
                   "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@restaurante.com\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/2",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/2",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "2"
                   ]
@@ -568,11 +598,13 @@
                   "raw": "{\n  \"name\": \"Qualquer Nome\",\n  \"email\": \"qualquer@email.com\",\n  \"address\": {\n    \"street\": \"Rua X\",\n    \"number\": \"1\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/99999",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/99999",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "99999"
                   ]
@@ -599,11 +631,13 @@
                   "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"address\": null\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1"
                   ]
@@ -630,11 +664,13 @@
                   "raw": "{\n  \"name\": \"Tentativa Indevida\",\n  \"email\": \"outro@restaurante.com\",\n  \"address\": {\n    \"street\": \"Rua X\",\n    \"number\": \"1\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/2",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/2",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "2"
                   ]
@@ -661,11 +697,13 @@
                   "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/2/password",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/2/password",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "2",
                     "password"
@@ -693,11 +731,13 @@
                   "raw": "{\n  \"currentPassword\": \"senhaErrada\",\n  \"newPassword\": \"novaSenha456\"\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1/password",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1/password",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1",
                     "password"
@@ -725,11 +765,13 @@
                   "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"123\"\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1/password",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1/password",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1",
                     "password"
@@ -757,11 +799,13 @@
                   "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/99999/password",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/99999/password",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "99999",
                     "password"
@@ -785,11 +829,13 @@
                   "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@restaurante.com\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1"
                   ]
@@ -803,11 +849,13 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1"
                   ]
@@ -830,11 +878,13 @@
                   "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/restaurant-owners/1/password",
+                  "raw": "{{baseUrl}}/api/v1/restaurant-owners/1/password",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "api",
+                    "v1",
                     "restaurant-owners",
                     "1",
                     "password"
