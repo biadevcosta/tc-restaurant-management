@@ -1,6 +1,14 @@
 # TC Restaurant Management
 
-REST API for managing restaurant owners and customers, with JWT authentication.
+## Overview
+
+**TC Restaurant Management** is a REST API built with Java and Spring Boot for managing users in a restaurant system. It supports two user profiles — **customers** and **restaurant owners** — with full CRUD operations for each.
+
+Authentication is handled via **JWT**: after logging in, the user receives a token valid for 24 hours, which must be sent in the `Authorization: Bearer <token>` header on all protected requests. Users can only modify or delete their own data; attempting to change another user's data returns `403 Forbidden`.
+
+All error responses follow the **RFC 7807 Problem Detail** format. The API is documented via **Swagger UI** and ships with a complete **Postman collection** — including automatic token capture after login — covering success and error scenarios for every endpoint.
+
+---
 
 ## Tech Stack
 
@@ -78,6 +86,16 @@ base_users (id, name, email, login, password, role, lastModifiedAt, address fiel
 
 `Address` is an embedded value object stored directly in `base_users` (no separate table).
 
+### ER Diagram
+
+`base_users` is the parent table holding all shared fields (identity, credentials, role, address). Both `customers` and `restaurant_owners` are child tables whose `id` is a foreign key referencing `base_users.id` — they have no direct relationship with each other.
+
+![ER Diagram](docs/images/db-er-diagram.PNG)
+
+### Database — base_users table
+
+![base_users table](docs/images/db-table-base_users.PNG)
+
 ---
 
 ## Endpoints
@@ -152,7 +170,13 @@ To test protected endpoints:
 2. Click **Authorize** and enter `Bearer <token>`.
 3. All protected requests will include the header automatically.
 
-> 📷 *[Insert Swagger UI screenshot here]*
+![Swagger UI overview](docs/images/swagger-1.PNG)
+
+![Swagger UI endpoints](docs/images/swagger-2.PNG)
+
+![Swagger login example](docs/images/swagger-example-login.PNG)
+
+![Swagger get customer example](docs/images/swagger-example-get-client.PNG)
 
 ### Option 2 — Postman
 
@@ -162,6 +186,32 @@ Import both files from the `postman/` folder:
 
 Select the **TC Restaurant - Local** environment. After running the **Login** request, the token is saved automatically to the `{{token}}` variable — no manual configuration needed.
 
-> 📷 *[Insert Postman collection screenshot here]*
-
 The collection covers all endpoints including error scenarios (400, 401, 403, 404, 409).
+
+#### Auth
+
+![Login success and error](docs/images/potman-login-sucess-and-error.PNG)
+
+![Login customer example](docs/images/postman-login-customer-example.PNG)
+
+![Login restaurant owner example](docs/images/postman-login-restaurant-owner-example.PNG)
+
+#### Customers
+
+![Customers success and errors overview](docs/images/postman-customers-success-and-erros.PNG)
+
+![Create customer example](docs/images/postman-post-create-customer-example.PNG)
+
+![Get customer example](docs/images/postman-get-customer-example.PNG)
+
+![Change customer password example](docs/images/postman-customers-patch-change-password.PNG)
+
+#### Restaurant Owners
+
+![Restaurant owners success and errors overview](docs/images/postman-restaurant-owners-success-and-error.PNG)
+
+![Get restaurant owner example](docs/images/postman-get-restaurant-owner-example.PNG)
+
+![Duplicate email error example](docs/images/postman-post-resaturant-owner-error-duplicate-email.PNG)
+
+![Change another user password — 403 example](docs/images/postman-patch-restaurant-owner-another-user-password.PNG)
